@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setAuth(data.data.token, data.data.user);
     setToken(data.data.token);
     setUser(data.data.user);
-    router.push("/catalog");
+    router.push("/products");
   };
 
   const logout = () => {
