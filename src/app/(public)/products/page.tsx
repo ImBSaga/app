@@ -1,12 +1,16 @@
 "use client";
 
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useProducts } from "@/hooks/useProducts";
 import ProductCard from "@/components/container/ProductCard";
 import ProductFilters from "@/components/container/ProductFilters";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Input } from "@/components/ui/input";
 
 export default function ProductPage() {
+  const searchParams = useSearchParams();
+  const queryParam = searchParams.get("q") ?? "";
+
   const {
     products,
     categories,
@@ -14,20 +18,19 @@ export default function ProductPage() {
     error,
     handleFilterChange,
     lastElementRef,
+    filters,
   } = useProducts();
+
+  useEffect(() => {
+    // Only trigger if the query changed
+    if (filters.q !== queryParam) {
+      handleFilterChange({ q: queryParam });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryParam]);
 
   return (
     <main className="min-h-screen bg-[#F5F5F5] p-8 space-y-6">
-      <header className="flex justify-between items-center">
-        <Input
-          placeholder="Search products..."
-          className="max-w-sm"
-          onChange={(e) =>
-            handleFilterChange({ q: e.target.value, page: 1, limit: 20 })
-          }
-        />
-      </header>
-
       <h1 className="text-2xl font-bold">Catalog</h1>
 
       <ProductFilters

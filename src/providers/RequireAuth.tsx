@@ -26,6 +26,5 @@ export default function RequireAuth({
     return <p>Redirecting...</p>;
   }
 
-  console.log("Authenticated user:", user);
   return <>{children}</>;
 }

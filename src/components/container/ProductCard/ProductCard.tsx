@@ -48,6 +48,7 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
               alt="Verified"
               width={24}
               height={24}
+              className="w-auto h-auto"
             />
             <p className="text-sm text-gray-700">{product.shop.name}</p>
           </div>

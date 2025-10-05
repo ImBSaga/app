@@ -1,3 +1,4 @@
+// app/product/[id]/page.tsx
 "use client";
 
 import { useParams } from "next/navigation";
@@ -6,10 +7,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useState } from "react";
+import { useCart } from "@/hooks/useCart";
 
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { product, loading, error } = useProductDetail(Number(id));
+  const { handleAddItem } = useCart();
+  const [qty, setQty] = useState<number>(1);
 
   if (loading)
     return (
@@ -21,6 +26,13 @@ export default function ProductDetailPage() {
   if (error) return <p className="text-red-500 p-8">{error}</p>;
   if (!product) return <p className="text-gray-500 p-8">Product not found</p>;
 
+  const increment = () => setQty((prev) => prev + 1);
+  const decrement = () => setQty((prev) => (prev > 1 ? prev - 1 : 1));
+
+  const handleAddToCart = async () => {
+    await handleAddItem({ productId: product.id, qty });
+  };
+
   return (
     <main className="min-h-screen bg-[#F5F5F5] p-8">
       <Card className="max-w-4xl mx-auto">
@@ -29,10 +41,6 @@ export default function ProductDetailPage() {
             <Image
               src={product.images?.[0] || "/images/image-placeholder.jpeg"}
               alt={product.title}
-              onError={(e) => {
-                (e.target as HTMLImageElement).src =
-                  "/images/image-placeholder.jpeg";
-              }}
               width={400}
               height={400}
             />
@@ -40,11 +48,27 @@ export default function ProductDetailPage() {
 
           <div className="space-y-4">
             <h1 className="text-2xl font-bold">{product.title}</h1>
-            <p className="text-gray-600">{product.category.name}</p>
             <p className="text-xl font-semibold">${product.price}</p>
-            <p className="text-gray-700">{product.description}</p>
 
-            <Button>Add to Cart</Button>
+            <div className="flex items-center gap-2">
+              <Button onClick={decrement} variant="outline">
+                –
+              </Button>
+              <input
+                type="number"
+                value={qty}
+                onChange={(e) => setQty(Number(e.target.value))}
+                className="w-16 text-center border rounded-lg"
+                min={1}
+              />
+              <Button onClick={increment} variant="outline">
+                +
+              </Button>
+            </div>
+
+            <Button onClick={handleAddToCart} className="w-full">
+              Add to Cart
+            </Button>
           </div>
         </CardContent>
       </Card>
