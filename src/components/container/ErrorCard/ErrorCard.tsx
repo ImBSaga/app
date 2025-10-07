@@ -1,10 +1,12 @@
+// Types
+import type { ErrorCardProps } from "@/types/Global.type";
+
 // Shadcn
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AlertCircle } from "lucide-react";
 
-// Types
-import type { ErrorCardProps } from "@/types/Global.type";
+// Icons
+import { AlertCircle } from "lucide-react";
 
 export const ErrorCard = ({ message, onRetry }: ErrorCardProps) => {
   return (

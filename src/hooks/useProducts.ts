@@ -1,11 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { getProducts } from "@/services/products.service";
-import { getCategories } from "@/services/categories.service";
+
+// Types
 import type { Product } from "@/types/Products.type";
 import type { Category } from "@/types/Categories.type";
 import type { GetProductsTypes } from "@/lib/validation/products.validation";
+
+// Service
+import { getProducts } from "@/services/products.service";
+import { getCategories } from "@/services/categories.service";
 
 export const useProducts = () => {
   // States

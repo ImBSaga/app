@@ -2,12 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  checkout,
-  getOrders,
-  getOrderDetail,
-  completeOrder,
-} from "@/services/orders.service";
+
+// Types
 import type {
   CheckoutTypes,
   GetOrdersTypes,
@@ -15,6 +11,14 @@ import type {
   CompleteOrderTypes,
 } from "@/lib/validation/orders.validation";
 import type { Order } from "@/types/Orders.type";
+
+// Service
+import {
+  checkout,
+  getOrders,
+  getOrderDetail,
+  completeOrder,
+} from "@/services/orders.service";
 
 export function useOrders() {
   const [loading, setLoading] = useState(false);

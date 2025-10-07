@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginService, registerService } from "@/services/auth.service";
 
 // Validation
 import {
@@ -13,6 +12,9 @@ import {
 
 // Types
 import type { LoginResponse, RegisterResponse } from "@/types/Auth.type";
+
+// Service
+import { loginService, registerService } from "@/services/auth.service";
 
 // Hooks
 import { useAuth } from "@/providers/AuthProvider";

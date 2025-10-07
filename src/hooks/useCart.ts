@@ -2,6 +2,15 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+
+// Types
+import type { Item } from "@/types/Cart.type";
+import type {
+  AddItemToCartTypes,
+  UpdateItemQtyTypes,
+} from "@/lib/validation/cart.validation";
+
+// Service
 import {
   getCart,
   deleteCart,
@@ -9,11 +18,6 @@ import {
   updateItemQty,
   deleteItemFromCart,
 } from "@/services/cart.service";
-import type { Item } from "@/types/Cart.type";
-import type {
-  AddItemToCartTypes,
-  UpdateItemQtyTypes,
-} from "@/lib/validation/cart.validation";
 
 export function useCart() {
   const [items, setItems] = useState<Item[]>([]);

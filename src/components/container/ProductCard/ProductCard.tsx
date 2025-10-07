@@ -1,10 +1,16 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-import { Star } from "lucide-react";
-import type { ProductCardProps } from "@/types/Products.type";
 import Link from "next/link";
+
+// Types
+import type { ProductCardProps } from "@/types/Products.type";
+
+// Shadcn
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+// Icons
+import { Star } from "lucide-react";
 
 const ProductCard = ({ product, index }: ProductCardProps) => {
   return (

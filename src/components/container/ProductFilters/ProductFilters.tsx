@@ -1,5 +1,9 @@
 "use client";
 
+// Types
+import type { ProductFiltersProps } from "@/types/Products.type";
+
+// Shadcn
 import {
   Select,
   SelectTrigger,
@@ -7,7 +11,6 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import type { ProductFiltersProps } from "@/types/Products.type";
 
 const ProductFilters = ({
   categories,

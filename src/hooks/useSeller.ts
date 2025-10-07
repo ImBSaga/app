@@ -2,11 +2,10 @@
 
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import {
-  sellerActivation,
-  getShop,
-  updateShop,
-} from "@/services/seller.service";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// Types
 import type {
   SellerActivateResponse,
   GetSellerShopResponse,
@@ -18,8 +17,13 @@ import {
   type SellerActivationTypes,
   type UpdateShopTypes,
 } from "@/lib/validation/seller.validation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+// Service
+import {
+  sellerActivation,
+  getShop,
+  updateShop,
+} from "@/services/seller.service";
 
 export function useSeller() {
   const router = useRouter();
@@ -57,7 +61,11 @@ export function useSeller() {
       setLoading(true);
       setError(null);
       const res: GetSellerShopResponse = await getShop();
-      if (res.success) setShop(res.data);
+      if (res.success) {
+        setShop(res.data);
+      } else {
+        setError(res.message);
+      }
       return res;
     } catch (err: Error | unknown) {
       setError(err instanceof Error ? err.message : "Failed to load shop data");

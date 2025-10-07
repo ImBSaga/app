@@ -1,8 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getProductById } from "@/services/products.service";
+
+// Types
 import type { ProductDetail } from "@/types/Products.type";
+
+// Service
+import { getProductById } from "@/services/products.service";
 
 export const useProductDetail = (id: number) => {
   // States
