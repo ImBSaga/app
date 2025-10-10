@@ -93,7 +93,7 @@ export default function CartPage() {
                       onChange={() => toggleSelectItem(item.id)}
                     />
                     <div>
-                      <p className="font-semibold">{item.product.title}</p>
+                      <p className="font-semibold">{item.product?.title}</p>
                       <p className="text-sm text-gray-600">
                         ${item.priceSnapshot} x {item.qty} ={" "}
                         <span className="font-bold">${item.subtotal}</span>

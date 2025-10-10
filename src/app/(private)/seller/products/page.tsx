@@ -82,7 +82,7 @@ export default function SellerProductsPage() {
   const handleSave = async (payload: CreateSellerProductsTypes) => {
     try {
       if (editing) {
-        await update(editing.id, { ...payload, merge: true });
+        await update(editing.id, { ...payload });
       } else {
         await create(payload);
       }

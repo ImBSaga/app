@@ -5,7 +5,7 @@ export type Item = {
   qty: number;
   priceSnapshot: number;
   subtotal: number;
-  product: Product;
+  product?: Product;
 };
 
 export type Product = {

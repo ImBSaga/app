@@ -8,13 +8,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useState } from "react";
-import { useCart } from "@/hooks/useCart";
+import { useCartContext } from "@/providers/CartProvider";
+import { useAuth } from "@/providers/AuthProvider";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function ProductDetailPage() {
+  const router = useRouter();
   const { id } = useParams<{ id: string }>();
   const { product, loading, error } = useProductDetail(Number(id));
-  const { handleAddItem } = useCart();
+  const { user } = useAuth();
+  const { handleAddItem } = useCartContext();
   const [qty, setQty] = useState<number>(1);
+  const [adding, setAdding] = useState(false);
 
   if (loading)
     return (
@@ -30,7 +36,22 @@ export default function ProductDetailPage() {
   const decrement = () => setQty((prev) => (prev > 1 ? prev - 1 : 1));
 
   const handleAddToCart = async () => {
-    await handleAddItem({ productId: product.id, qty });
+    setAdding(true);
+    try {
+      await handleAddItem({ productId: product.id, qty });
+      toast.success("Added to cart!", {
+        description: `${qty} × ${product.title}`,
+        duration: 2000,
+      });
+    } catch {
+      toast.error("Failed to add item to cart.");
+    } finally {
+      setAdding(false);
+    }
+  };
+
+  const handleNavigateLogin = () => {
+    router.push("/login");
   };
 
   return (
@@ -66,9 +87,19 @@ export default function ProductDetailPage() {
               </Button>
             </div>
 
-            <Button onClick={handleAddToCart} className="w-full">
-              Add to Cart
-            </Button>
+            {user ? (
+              <Button
+                onClick={handleAddToCart}
+                className="w-full"
+                disabled={adding}
+              >
+                {adding ? "Adding..." : "Add to Cart"}
+              </Button>
+            ) : (
+              <Button onClick={handleNavigateLogin} className="w-full">
+                Login to Add to Cart
+              </Button>
+            )}
           </div>
         </CardContent>
       </Card>

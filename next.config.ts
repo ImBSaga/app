@@ -5,19 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "res.cloudinary.com",
-      },
-      {
-        protocol: "https",
-        hostname: "static-ecapac.acer.com",
-      },
-      {
-        protocol: "https",
-        hostname: "www.mobiledokan.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
+        hostname: "**", // allow all hosts
       },
     ],
   },

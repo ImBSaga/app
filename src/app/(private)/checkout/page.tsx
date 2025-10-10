@@ -39,7 +39,7 @@ export default function CheckoutPage() {
                 className="flex items-center justify-between border-b py-4"
               >
                 <div>
-                  <p className="font-semibold">{item.product.title}</p>
+                  <p className="font-semibold">{item.product?.title}</p>
                   <p className="text-sm text-gray-600">
                     ${item.priceSnapshot} × {item.qty} ={" "}
                     <span className="font-bold">${item.subtotal}</span>

@@ -25,3 +25,11 @@ export type Review = {
   createdAt: string;
   user: User;
 };
+
+// Confirm Dialog
+export type ConfirmDialogProps = {
+  title?: string;
+  message?: string;
+  onConfirm?: () => void;
+  onCancel?: () => void;
+};
